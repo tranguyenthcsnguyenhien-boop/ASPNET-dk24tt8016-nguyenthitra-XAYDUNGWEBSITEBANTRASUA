@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Data;
 using WebBanTraSua.BLL;
 
 namespace WebBanTraSua
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class SanPham : System.Web.UI.Page
     {
         SanPhamBLL sanPhamBLL = new SanPhamBLL();
 
@@ -12,17 +12,18 @@ namespace WebBanTraSua
         {
             if (!IsPostBack)
             {
-                LoadSanPhamBanChay();
+                LoadSanPham();
             }
         }
 
-        private void LoadSanPhamBanChay()
+        private void LoadSanPham()
         {
-            DataTable dt = sanPhamBLL.LaySanPhamBanChay(3);
+            DataTable dt = sanPhamBLL.LayDanhSachSanPham();
+            
             if (dt.Rows.Count > 0)
             {
-                rptSanPhamBanChay.DataSource = dt;
-                rptSanPhamBanChay.DataBind();
+                rptSanPham.DataSource = dt;
+                rptSanPham.DataBind();
             }
         }
     }

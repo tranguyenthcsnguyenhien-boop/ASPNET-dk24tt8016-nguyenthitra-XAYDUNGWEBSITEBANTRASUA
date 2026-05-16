@@ -1,27 +1,141 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebBanTraSua.SiteMaster" %>
 
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="vi">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Tiệm Trà Sữa Premium</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Google Fonts xịn xò: Outfit cho Tiêu đề, Inter cho Nội dung -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
+    <style>
+        :root {
+            --primary: #C87941;
+            --secondary: #874C27;
+            --bg-color: #FDFBF7;
+            --text-dark: #2C1E16;
+            --accent: #E2B15B;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Hiệu ứng kính mờ (Glassmorphism) cho Thanh điều hướng */
+        .navbar-glass {
+            background: rgba(253, 251, 247, 0.85) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 121, 65, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: var(--secondary) !important;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-brand i {
+            color: var(--primary);
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        /* Hiệu ứng gạch chân khi di chuột */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Nút giỏ hàng đặc biệt */
+        .btn-cart {
+            background-color: var(--primary);
+            color: white !important;
+            border-radius: 50px;
+            padding: 8px 20px !important;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(200, 121, 65, 0.3);
+        }
+
+        .btn-cart:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(135, 76, 39, 0.4);
+        }
+
+        .btn-cart::after {
+            display: none; 
+        }
+
+        /* Footer sang trọng */
+        .footer-premium {
+            background-color: var(--text-dark);
+            color: rgba(255,255,255,0.8);
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-premium .brand-text {
+            font-family: 'Outfit', sans-serif;
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .footer-premium a:hover {
+            color: var(--accent) !important;
+            opacity: 1 !important;
+        }
+
+        .min-vh-70 { min-height: 70vh; }
+    </style>
 </head>
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
@@ -33,37 +147,116 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <!-- Navbar Premium -->
+        <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-3">
             <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <a class="navbar-brand d-flex align-items-center gap-2" runat="server" href="~/">
+                    <i class="fa-solid fa-leaf"></i> Oolong Tea
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <i class="fa-solid fa-bars fs-3 text-dark"></i>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/">Trang Chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/SanPham.aspx">Thực Đơn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Contact">Liên Hệ</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav gap-2 align-items-center">
+                        <% if (Session["User"] == null) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/DangNhap.aspx" title="Đăng nhập">
+                                <i class="fa-regular fa-circle-user fs-5"></i>
+                            </a>
+                        </li>
+                        <% } else { 
+                            var user = (WebBanTraSua.DTO.UserDTO)Session["User"];
+                        %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" style="color: var(--primary) !important;">
+                                <i class="fa-solid fa-user-check"></i> <%= user.FullName %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" style="border-radius: 15px;">
+                                <% if (user.Role == "Admin") { %>
+                                <li><a class="dropdown-item fw-bold text-danger py-2" href="Admin/Default.aspx"><i class="fa-solid fa-gauge me-2"></i>Quản Trị Hệ Thống</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <% } %>
+                                <li><a class="dropdown-item py-2" href="DangXuat.aspx"><i class="fa-solid fa-right-from-bracket me-2 text-muted"></i>Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        <% } %>
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link btn-cart d-flex align-items-center gap-2" runat="server" href="~/GioHang.aspx">
+                                <i class="fa-solid fa-bag-shopping"></i> <span class="d-none d-lg-inline">Giỏ Hàng</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container body-content">
+
+        <!-- Main Content -->
+        <div class="container-fluid p-0 min-vh-70">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
         </div>
+
+        <!-- Premium Footer -->
+        <footer class="footer-premium">
+            <div class="container">
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4">
+                        <h4 class="brand-text mb-3"><i class="fa-solid fa-leaf"></i> Oolong Tea</h4>
+                        <p class="pe-lg-4">Mang đến trải nghiệm trà sữa đích thực với nguyên liệu tinh tuyển từ những đồi chè danh tiếng nhất.</p>
+                        <div class="d-flex gap-3 mt-4">
+                            <a href="#" class="text-white opacity-75 text-decoration-none fs-5 transition-all"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#" class="text-white opacity-75 text-decoration-none fs-5 transition-all"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="text-white opacity-75 text-decoration-none fs-5 transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <h5 class="text-white mb-3 font-outfit">Khám phá</h5>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Về chúng tôi</a></li>
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Thực đơn</a></li>
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <h5 class="text-white mb-3 font-outfit">Chính sách</h5>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Điều khoản sử dụng</a></li>
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Chính sách bảo mật</a></li>
+                            <li><a href="#" class="text-white opacity-75 text-decoration-none transition-all">Chính sách giao hàng</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <h5 class="text-white mb-3 font-outfit">Liên hệ</h5>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li class="opacity-75"><i class="fa-solid fa-location-dot me-2 text-warning"></i> 1 Võ Văn Ngân, Thủ Đức</li>
+                            <li class="opacity-75"><i class="fa-solid fa-phone me-2 text-warning"></i> 1900 1508</li>
+                            <li class="opacity-75"><i class="fa-solid fa-envelope me-2 text-warning"></i> hello@oolongtea.vn</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="border-secondary opacity-25">
+                <div class="text-center pt-3 opacity-50 small">
+                    <p class="mb-0">&copy; <%: DateTime.Now.Year %> Oolong Tea. All rights reserved.</p>
+                    <p class="mb-0 mt-1">Đồ Án Chuyên Đề ASP.NET - Lớp D24TT8016</p>
+                </div>
+            </div>
+        </footer>
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
