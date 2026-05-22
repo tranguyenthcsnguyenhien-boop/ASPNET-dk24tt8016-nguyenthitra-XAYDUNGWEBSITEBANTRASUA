@@ -1,4 +1,4 @@
-﻿using WebBanTraSua.DAL;
+using WebBanTraSua.DAL;
 using WebBanTraSua.DTO;
 
 namespace WebBanTraSua.BLL
@@ -21,6 +21,31 @@ namespace WebBanTraSua.BLL
                 return "OK";
             else
                 return "Có lỗi xảy ra khi đăng ký!";
+        }
+
+        public UserDTO LayThongTinNguoiDung(int userId)
+        {
+            return dal.LayThongTinNguoiDung(userId);
+        }
+
+        public int DemSoLuongKhachHang()
+        {
+            return dal.DemSoLuongKhachHang();
+        }
+
+        public System.Data.DataTable LayDanhSachTatCaUser()
+        {
+            return dal.LayDanhSachTatCaUser();
+        }
+
+        public bool CapNhatQuyenUser(int userId, string newRole)
+        {
+            return dal.CapNhatQuyenUser(userId, newRole);
+        }
+
+        public bool XoaUser(int userId)
+        {
+            return dal.XoaUser(userId);
         }
     }
 }
