@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Web.UI.WebControls;
 using WebBanTraSua.BLL;
 
@@ -26,31 +26,16 @@ namespace WebBanTraSua
 
         private void LoadSanPham()
         {
-            int? catId = null;
             if (Request.QueryString["catId"] != null)
             {
-                int id;
-                if (int.TryParse(Request.QueryString["catId"], out id))
-                {
-                    catId = id;
-                }
+                int catId = int.Parse(Request.QueryString["catId"]);
+                rptSanPham.DataSource = sanPhamBLL.LaySanPhamTheoLoai(catId);
             }
-
-            string search = txtSearch.Text.Trim();
-            string sort = ddlSortPrice.SelectedValue;
-
-            rptSanPham.DataSource = sanPhamBLL.LaySanPhamNangCao(catId, search, sort);
+            else
+            {
+                rptSanPham.DataSource = sanPhamBLL.LayDanhSachSanPham();
+            }
             rptSanPham.DataBind();
-        }
-
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadSanPham();
-        }
-
-        protected void ddlSortPrice_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadSanPham();
         }
     }
 }
