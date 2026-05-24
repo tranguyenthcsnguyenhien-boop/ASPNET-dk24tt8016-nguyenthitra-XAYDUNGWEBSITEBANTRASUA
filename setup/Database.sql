@@ -32,7 +32,15 @@ CREATE TABLE tblSanPham (
     TrangThai BIT DEFAULT 1 -- 1: Đang bán, 0: Hết hàng
 );
 
--- 4. Bảng Đơn Hàng (Lưu thông tin mua hàng)
+-- 4. Bảng Giỏ Hàng (Lưu giỏ hàng theo UserID)
+CREATE TABLE tblGioHang (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES tblUser(ID),
+    SanPhamID INT FOREIGN KEY REFERENCES tblSanPham(ID),
+    SoLuong INT NOT NULL
+);
+
+-- 5. Bảng Đơn Hàng (Lưu thông tin mua hàng)
 CREATE TABLE tblDonHang (
     ID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT FOREIGN KEY REFERENCES tblUser(ID),
