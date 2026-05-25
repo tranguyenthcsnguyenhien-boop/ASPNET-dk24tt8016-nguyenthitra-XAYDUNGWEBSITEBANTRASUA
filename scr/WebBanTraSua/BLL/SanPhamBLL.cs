@@ -21,33 +21,6 @@ namespace WebBanTraSua.BLL
         {
             return dal.LaySanPhamBanChay(top);
         }
-
-        public DataTable LaySanPhamNangCao(int? maLoai, string search, string sortPrice)
-        {
-            return dal.LaySanPhamNangCao(maLoai, search, sortPrice);
-        }
-
-        // --- ADMIN METHODS ---
-
-        public DataTable LayDanhSachSanPhamTatCa()
-        {
-            return dal.LayDanhSachSanPhamTatCa();
-        }
-
-        public bool ThemSanPham(DTO.SanPhamDTO sp)
-        {
-            return dal.ThemSanPham(sp);
-        }
-
-        public bool CapNhatSanPham(DTO.SanPhamDTO sp)
-        {
-            return dal.CapNhatSanPham(sp);
-        }
-
-        public bool XoaSanPham(int id)
-        {
-            return dal.XoaSanPham(id);
-        }
     }
 }
 

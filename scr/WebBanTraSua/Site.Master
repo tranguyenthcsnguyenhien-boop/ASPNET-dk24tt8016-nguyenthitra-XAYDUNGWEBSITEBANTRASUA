@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebBanTraSua.SiteMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebBanTraSua.SiteMaster" %>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -170,6 +170,11 @@
                         <li class="nav-item">
                             <a class="nav-link" runat="server" href="~/Contact">Liên Hệ</a>
                         </li>
+                        <% if (Session["User"] != null) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/LichSuMuaHang.aspx">Lịch Sử Mua Hàng</a>
+                        </li>
+                        <% } %>
                     </ul>
                     <ul class="navbar-nav gap-2 align-items-center">
                         <% if (Session["User"] == null) { %>
@@ -187,16 +192,27 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" style="border-radius: 15px;">
                                 <% if (user.Role == "Admin") { %>
-                                <li><a class="dropdown-item fw-bold text-danger py-2" href="Admin/Default.aspx"><i class="fa-solid fa-gauge me-2"></i>Quản Trị Hệ Thống</a></li>
+                                <li><a class="dropdown-item fw-bold text-danger py-2" runat="server" href="~/Admin/Default.aspx"><i class="fa-solid fa-gauge me-2"></i>Quản Trị Hệ Thống</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <% } %>
-                                <li><a class="dropdown-item py-2" href="DangXuat.aspx"><i class="fa-solid fa-right-from-bracket me-2 text-muted"></i>Đăng xuất</a></li>
+                                <li><a class="dropdown-item py-2" runat="server" href="~/LichSuMuaHang.aspx"><i class="fa-solid fa-clock-rotate-left me-2 text-muted"></i>Lịch sử mua hàng</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item py-2" runat="server" href="~/DangXuat.aspx"><i class="fa-solid fa-right-from-bracket me-2 text-muted"></i>Đăng xuất</a></li>
                             </ul>
                         </li>
                         <% } %>
-                        <li class="nav-item ms-lg-2">
+                        <li class="nav-item ms-lg-2 position-relative">
                             <a class="nav-link btn-cart d-flex align-items-center gap-2" runat="server" href="~/GioHang.aspx">
-                                <i class="fa-solid fa-bag-shopping"></i> <span class="d-none d-lg-inline">Giỏ Hàng</span>
+                                <i class="fa-solid fa-bag-shopping fs-5"></i> <span class="d-none d-lg-inline fw-bold">Giỏ Hàng</span>
+                                                                <% if (Session["User"] != null) { 
+                                       var u = (WebBanTraSua.DTO.UserDTO)Session["User"];
+                                       int cartCount = new WebBanTraSua.BLL.GioHangBLL().DemSoLuongMon(u.ID);
+                                       if (cartCount > 0) {
+                                %>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
+                                    <%= cartCount %>
+                                </span>
+                                <% } } %>
                             </a>
                         </li>
                     </ul>

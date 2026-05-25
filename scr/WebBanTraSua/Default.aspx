@@ -164,7 +164,7 @@
                                 <p class="card-text text-muted small mb-3">Hương vị tuyệt hảo từ nguyên liệu tự nhiên tươi ngon nhất.</p>
                                 <div class="d-flex justify-content-between align-items-center mt-4">
                                     <span class="price-tag"><%# Convert.ToDecimal(Eval("Gia")).ToString("N0") %>đ</span>
-                                    <a href='ChiTiet.aspx?id=<%# Eval("ID") %>' class="btn btn-outline-dark rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#C87941'; this.style.color='white'; this.style.borderColor='#C87941';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#212529'; this.style.borderColor='#212529';">
+                                    <a href='GioHang.aspx?action=add&id=<%# Eval("ID") %>' class="btn btn-outline-dark rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#C87941'; this.style.color='white'; this.style.borderColor='#C87941';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#212529'; this.style.borderColor='#212529';">
                                         <i class="fa-solid fa-plus"></i>
                                     </a>
                                 </div>
