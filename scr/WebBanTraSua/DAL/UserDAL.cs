@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 using WebBanTraSua.DTO;
 
@@ -35,6 +35,24 @@ namespace WebBanTraSua.DAL
         {
             string sql = $"SELECT * FROM tblUser WHERE Username = '{username}'";
             return db.LayDuLieu(sql).Rows.Count > 0;
+        }
+
+        public UserDTO LayThongTinNguoiDung(int userId)
+        {
+            string sql = $"SELECT * FROM tblUser WHERE ID = {userId}";
+            DataTable dt = db.LayDuLieu(sql);
+            if (dt.Rows.Count > 0)
+            {
+                UserDTO user = new UserDTO();
+                user.ID = (int)dt.Rows[0]["ID"];
+                user.Username = dt.Rows[0]["Username"].ToString();
+                user.FullName = dt.Rows[0]["FullName"].ToString();
+                user.Email = dt.Rows[0]["Email"] != System.DBNull.Value ? dt.Rows[0]["Email"].ToString() : "";
+                user.Phone = dt.Rows[0]["Phone"] != System.DBNull.Value ? dt.Rows[0]["Phone"].ToString() : "";
+                user.Role = dt.Rows[0]["Role"].ToString();
+                return user;
+            }
+            return null;
         }
     }
 }

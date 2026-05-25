@@ -1,4 +1,4 @@
-﻿using WebBanTraSua.DAL;
+using WebBanTraSua.DAL;
 using WebBanTraSua.DTO;
 
 namespace WebBanTraSua.BLL
@@ -21,6 +21,11 @@ namespace WebBanTraSua.BLL
                 return "OK";
             else
                 return "Có lỗi xảy ra khi đăng ký!";
+        }
+
+        public UserDTO LayThongTinNguoiDung(int userId)
+        {
+            return dal.LayThongTinNguoiDung(userId);
         }
     }
 }
