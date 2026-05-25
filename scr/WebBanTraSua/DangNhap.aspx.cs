@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using WebBanTraSua.BLL;
 using WebBanTraSua.DTO;
 
@@ -15,6 +15,11 @@ namespace WebBanTraSua
                 lblMessage.CssClass = "text-success mb-3 d-block text-center fw-bold";
                 lblMessage.Text = "Đăng ký thành công! Vui lòng đăng nhập.";
             }
+            else if (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]) && !IsPostBack)
+            {
+                lblMessage.CssClass = "text-warning mb-3 d-block text-center fw-bold";
+                lblMessage.Text = "Bạn cần đăng nhập để tiếp tục!";
+            }
         }
 
         protected void btnDangNhap_Click(object sender, EventArgs e)
@@ -25,6 +30,8 @@ namespace WebBanTraSua
                 Session["User"] = user;
                 if (user.Role == "Admin")
                     Response.Redirect("~/Admin/Default.aspx");
+                else if (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+                    Response.Redirect(Request.QueryString["ReturnUrl"]);
                 else
                     Response.Redirect("Default.aspx");
             }

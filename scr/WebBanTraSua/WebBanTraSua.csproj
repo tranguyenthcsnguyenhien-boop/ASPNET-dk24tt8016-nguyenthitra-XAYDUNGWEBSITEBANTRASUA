@@ -119,6 +119,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="GioHang.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -203,6 +204,15 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+        <Compile Include="BLL\GioHangBLL.cs" />
+    <Compile Include="DTO\CartItemDTO.cs" />
+    <Compile Include="GioHang.aspx.cs">
+      <DependentUpon>GioHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GioHang.aspx.designer.cs">
+      <DependentUpon>GioHang.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,8 +257,12 @@
     <Compile Include="BLL\SanPhamBLL.cs" />
     <Compile Include="DTO\SanPhamDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\LoaiSPDTO.cs" />
     <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="DAL\LoaiSPDAL.cs" />
+    <Compile Include="DAL\GioHangDAL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="BLL\LoaiSPBLL.cs" />
     <Compile Include="DangKy.aspx.cs">
       <DependentUpon>DangKy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

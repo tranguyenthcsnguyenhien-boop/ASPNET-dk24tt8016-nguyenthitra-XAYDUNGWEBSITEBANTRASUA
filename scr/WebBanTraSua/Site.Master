@@ -194,9 +194,18 @@
                             </ul>
                         </li>
                         <% } %>
-                        <li class="nav-item ms-lg-2">
+                        <li class="nav-item ms-lg-2 position-relative">
                             <a class="nav-link btn-cart d-flex align-items-center gap-2" runat="server" href="~/GioHang.aspx">
-                                <i class="fa-solid fa-bag-shopping"></i> <span class="d-none d-lg-inline">Giỏ Hàng</span>
+                                <i class="fa-solid fa-bag-shopping fs-5"></i> <span class="d-none d-lg-inline fw-bold">Giỏ Hàng</span>
+                                                                <% if (Session["User"] != null) { 
+                                       var u = (WebBanTraSua.DTO.UserDTO)Session["User"];
+                                       int cartCount = new WebBanTraSua.BLL.GioHangBLL().DemSoLuongMon(u.ID);
+                                       if (cartCount > 0) {
+                                %>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
+                                    <%= cartCount %>
+                                </span>
+                                <% } } %>
                             </a>
                         </li>
                     </ul>

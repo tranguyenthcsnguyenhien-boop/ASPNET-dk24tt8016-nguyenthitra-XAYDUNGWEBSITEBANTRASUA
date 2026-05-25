@@ -1,10 +1,22 @@
-﻿<%@ Page Title="Thực Đơn" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SanPham.aspx.cs" Inherits="WebBanTraSua.SanPham" %>
+<%@ Page Title="Thực Đơn" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SanPham.aspx.cs" Inherits="WebBanTraSua.SanPham" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <div class="container py-5 mt-4">
         <h2 class="text-center mb-5" style="color: #8c5a2b; font-weight: 800; font-family: 'Outfit', sans-serif; text-transform: uppercase;">Thực Đơn Của Chúng Tôi</h2>
         
+        <!-- Danh Mục Sản Phẩm -->
+        <div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+            <a href="SanPham.aspx" class='btn <%= Request.QueryString["catId"] == null ? "btn-dark" : "btn-outline-dark" %> rounded-pill px-4 fw-bold'>Tất cả</a>
+            <asp:Repeater ID="rptLoaiSP" runat="server">
+                <ItemTemplate>
+                    <a href='SanPham.aspx?catId=<%# Eval("ID") %>' class='btn <%# Request.QueryString["catId"] == Eval("ID").ToString() ? "btn-dark" : "btn-outline-dark" %> rounded-pill px-4 fw-bold'>
+                        <%# Eval("TenLoai") %>
+                    </a>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
         <!-- Bắt đầu vòng lặp Repeater để đổ dữ liệu từ SQL -->
         <div class="row g-4">
             <asp:Repeater ID="rptSanPham" runat="server">
@@ -20,7 +32,7 @@
                             <div class="card-body text-center p-4" style="background-color: #fffcf5;">
                                 <h5 class="card-title fw-bold" style="color: #d4a373; font-size: 1.15rem; min-height: 55px;"><%# Eval("TenSP") %></h5>
                                 <p class="fw-bold fs-4 mt-2" style="color: #e63946;"><%# Convert.ToDecimal(Eval("Gia")).ToString("N0") %> đ</p>
-                                <a href='ChiTiet.aspx?id=<%# Eval("ID") %>' class="btn btn-outline-dark rounded-pill px-4 py-2 mt-2 w-100 fw-bold" style="transition: all 0.3s;" onmouseover="this.style.backgroundColor='#C87941'; this.style.color='white'; this.style.borderColor='#C87941';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#212529'; this.style.borderColor='#212529';">
+                                <a href='GioHang.aspx?action=add&id=<%# Eval("ID") %>' class="btn btn-outline-dark rounded-pill px-4 py-2 mt-2 w-100 fw-bold" style="transition: all 0.3s;" onmouseover="this.style.backgroundColor='#C87941'; this.style.color='white'; this.style.borderColor='#C87941';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#212529'; this.style.borderColor='#212529';">
                                     <i class="fa-solid fa-cart-plus"></i> Đặt Mua
                                 </a>
                             </div>
