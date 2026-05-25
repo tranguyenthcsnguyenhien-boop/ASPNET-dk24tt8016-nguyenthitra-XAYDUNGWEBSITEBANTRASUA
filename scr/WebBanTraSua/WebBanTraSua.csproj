@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -186,6 +186,8 @@
     <Content Include="DangKy.aspx" />
     <Content Include="DangNhap.aspx" />
     <Content Include="DangXuat.aspx" />
+    <Content Include="ThanhToan.aspx" />
+    <Content Include="LichSuMuaHang.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -283,6 +285,24 @@
     </Compile>
     <Compile Include="DangXuat.aspx.designer.cs">
       <DependentUpon>DangXuat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DonHangDTO.cs" />
+    <Compile Include="DTO\ChiTietDonHangDTO.cs" />
+    <Compile Include="DAL\DonHangDAL.cs" />
+    <Compile Include="BLL\DonHangBLL.cs" />
+    <Compile Include="ThanhToan.aspx.cs">
+      <DependentUpon>ThanhToan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ThanhToan.aspx.designer.cs">
+      <DependentUpon>ThanhToan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LichSuMuaHang.aspx.cs">
+      <DependentUpon>LichSuMuaHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LichSuMuaHang.aspx.designer.cs">
+      <DependentUpon>LichSuMuaHang.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
