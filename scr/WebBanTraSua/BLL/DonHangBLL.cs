@@ -26,5 +26,29 @@ namespace WebBanTraSua.BLL
         {
             return dal.LayChiTietDonHang(donHangId);
         }
+
+        // --- ADMIN METHODS ---
+
+        public DataTable LayTatCaDonHang()
+        {
+            return dal.LayTatCaDonHang();
+        }
+
+        public bool CapNhatTrangThaiDonHang(int donHangId, string trangThaiMoi)
+        {
+            if (string.IsNullOrEmpty(trangThaiMoi))
+                return false;
+            return dal.CapNhatTrangThaiDonHang(donHangId, trangThaiMoi);
+        }
+
+        public DataTable LayDoanhThu7NgayGanNhat()
+        {
+            return dal.LayDoanhThu7NgayGanNhat();
+        }
+
+        public DataTable LayTrongLuongDoanhThuTheoLoai()
+        {
+            return dal.LayTrongLuongDoanhThuTheoLoai();
+        }
     }
 }
