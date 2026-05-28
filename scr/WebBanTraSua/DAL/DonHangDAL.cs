@@ -121,5 +121,87 @@ namespace WebBanTraSua.DAL
             }
             return dt;
         }
+
+        // --- ADMIN METHODS ---
+
+        public DataTable LayTatCaDonHang()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(chuoiKetNoi))
+            {
+                string sql = "SELECT dh.*, u.FullName, u.Username " +
+                             "FROM tblDonHang dh " +
+                             "JOIN tblUser u ON dh.UserID = u.ID " +
+                             "ORDER BY dh.NgayDat DESC";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public bool CapNhatTrangThaiDonHang(int donHangId, string trangThaiMoi)
+        {
+            using (SqlConnection conn = new SqlConnection(chuoiKetNoi))
+            {
+                string sql = "UPDATE tblDonHang SET TrangThai = @TrangThai WHERE ID = @ID";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", donHangId);
+                    cmd.Parameters.AddWithValue("@TrangThai", trangThaiMoi);
+                    
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public DataTable LayDoanhThu7NgayGanNhat()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(chuoiKetNoi))
+            {
+                string sql = "SELECT TOP 7 CONVERT(VARCHAR(10), NgayDat, 103) AS Ngay, SUM(TongTien) AS DoanhThu " +
+                             "FROM tblDonHang " +
+                             "WHERE TrangThai = N'Hoàn Thành' " +
+                             "GROUP BY CONVERT(VARCHAR(10), NgayDat, 103), CAST(NgayDat AS DATE) " +
+                             "ORDER BY CAST(NgayDat AS DATE) ASC";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public DataTable LayTrongLuongDoanhThuTheoLoai()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(chuoiKetNoi))
+            {
+                string sql = "SELECT l.TenLoai, SUM(ct.SoLuong * ct.DonGia) AS DoanhThu " +
+                             "FROM tblChiTietDonHang ct " +
+                             "JOIN tblSanPham sp ON ct.SanPhamID = sp.ID " +
+                             "JOIN tblLoaiSP l ON sp.MaLoai = l.ID " +
+                             "JOIN tblDonHang d ON ct.DonHangID = d.ID " +
+                             "WHERE d.TrangThai = N'Hoàn Thành' " +
+                             "GROUP BY l.TenLoai";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
     }
 }
