@@ -20,6 +20,11 @@ namespace WebBanTraSua
                 lblMessage.CssClass = "text-warning mb-3 d-block text-center fw-bold";
                 lblMessage.Text = "Bạn cần đăng nhập để tiếp tục!";
             }
+            else if (Request.QueryString["msg"] == "not_admin" && !IsPostBack)
+            {
+                lblMessage.CssClass = "text-danger mb-3 d-block text-center fw-bold";
+                lblMessage.Text = "Tài khoản của bạn không có quyền truy cập trang quản trị!";
+            }
         }
 
         protected void btnDangNhap_Click(object sender, EventArgs e)
