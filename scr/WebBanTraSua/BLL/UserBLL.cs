@@ -27,5 +27,25 @@ namespace WebBanTraSua.BLL
         {
             return dal.LayThongTinNguoiDung(userId);
         }
+
+        public int DemSoLuongKhachHang()
+        {
+            return dal.DemSoLuongKhachHang();
+        }
+
+        public System.Data.DataTable LayDanhSachTatCaUser()
+        {
+            return dal.LayDanhSachTatCaUser();
+        }
+
+        public bool CapNhatQuyenUser(int userId, string newRole)
+        {
+            return dal.CapNhatQuyenUser(userId, newRole);
+        }
+
+        public bool XoaUser(int userId)
+        {
+            return dal.XoaUser(userId);
+        }
     }
 }
